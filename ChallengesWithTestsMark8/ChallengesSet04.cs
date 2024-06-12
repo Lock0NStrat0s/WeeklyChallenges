@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ChallengesWithTestsMark8
 {
@@ -6,47 +8,61 @@ namespace ChallengesWithTestsMark8
     {
         public int AddEvenSubtractOdd(int[] numbers)
         {
-            throw new NotImplementedException();
+            return numbers.Select(x => x % 2 == 0 ? x : x * (-1)).Sum();
         }
 
         public int GetLengthOfShortestString(string str1, string str2, string str3, string str4)
         {
-            throw new NotImplementedException();
+            return new List<string> { str1, str2, str3, str4 }.Min(x => x.Length);
         }
 
         public int GetSmallestNumber(int number1, int number2, int number3, int number4)
         {
-            throw new NotImplementedException();
+            return new List<int> { number1, number2, number3, number4 }.Min();
         }
 
         public void ChangeBusinessNameTo_TrueCoders(Business biz)
         {
-            throw new NotImplementedException();
+            biz.Name = "TrueCoders";
         }
 
         public bool CouldFormTriangle(int sideLength1, int sideLength2, int sideLength3)
         {
-            throw new NotImplementedException();
+            var sides = new List<int> { sideLength1, sideLength2, sideLength3 }.OrderBy(x => x);
+            var shortestSide = sides.ElementAt(0);
+            var middleSide = sides.ElementAt(1);
+            var longestSide = sides.ElementAt(2);
+            return shortestSide + middleSide > longestSide;
         }
 
         public bool IsStringANumber(string input)
         {
-            throw new NotImplementedException();
+            return int.TryParse(input, out _) || double.TryParse(input, out _);
         }
 
         public bool MajorityOfElementsInArrayAreNull(object[] objs)
         {
-            throw new NotImplementedException();
+            int nullCount = objs.Count(x => x == null);
+            return nullCount > objs.Length / 2;
         }
 
         public double AverageEvens(int[] numbers)
         {
-            throw new NotImplementedException();
+            if (numbers == null) return 0;
+            var evens = numbers.Where(x => x % 2 == 0);
+            return evens.Count() < 1 ? 0 : evens.Average();
         }
 
         public int Factorial(int number)
         {
-            throw new NotImplementedException();
+            if (number < 0) throw new ArgumentOutOfRangeException();
+
+            while (number > 1)
+            {
+                return number * Factorial(number - 1);
+            }
+
+            return 1;
         }
     }
 }
